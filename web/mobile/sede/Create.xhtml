@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SedeCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateSedeTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SedeListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SedeCreateForm">
+
+                <h:panelGroup id="display" rendered="#{sedeController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSedeLabel_codigosede}" for="codigosede" />
+                            <p:inputText id="codigosede" value="#{sedeController.selected.codigosede}" title="#{myBundle.CreateSedeTitle_codigosede}" required="true" requiredMessage="#{myBundle.CreateSedeRequiredMessage_codigosede}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSedeLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{sedeController.selected.nombre}" title="#{myBundle.CreateSedeTitle_nombre}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSedeLabel_direccion}" for="direccion" />
+                            <p:inputText id="direccion" value="#{sedeController.selected.direccion}" title="#{myBundle.CreateSedeTitle_direccion}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSedeLabel_capacidad}" for="capacidad" />
+                            <p:inputText id="capacidad" value="#{sedeController.selected.capacidad}" title="#{myBundle.CreateSedeTitle_capacidad}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{sedeController.saveNew}" value="#{myBundle.Save}" update="display,:SedeListPage:SedeListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:SedeListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

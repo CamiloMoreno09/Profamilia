@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SedeEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditSedeTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SedeListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SedeEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{sedeController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditSedeLabel_codigosede}" for="codigosede" />
+                            <h:outputText id="codigosede" value="#{sedeController.selected.codigosede}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSedeLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{sedeController.selected.nombre}" title="#{myBundle.EditSedeTitle_nombre}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSedeLabel_direccion}" for="direccion" />
+                            <p:inputText id="direccion" value="#{sedeController.selected.direccion}" title="#{myBundle.EditSedeTitle_direccion}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSedeLabel_capacidad}" for="capacidad" />
+                            <p:inputText id="capacidad" value="#{sedeController.selected.capacidad}" title="#{myBundle.EditSedeTitle_capacidad}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{sedeController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:SedeListPage:SedeListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:SedeListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

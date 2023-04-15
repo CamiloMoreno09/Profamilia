@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DepartamentoEditDlg" widgetVar="DepartamentoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditDepartamentoTitle}" closeOnEscape="true">
+
+            <h:form id="DepartamentoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{departamentoController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditDepartamentoLabel_codigodepartamento}" for="codigodepartamento" />
+                        <h:outputText id="codigodepartamento" value="#{departamentoController.selected.codigodepartamento}" />
+
+                        <p:outputLabel value="#{myBundle.EditDepartamentoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{departamentoController.selected.nombre}" title="#{myBundle.EditDepartamentoTitle_nombre}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditDepartamentoLabel_modalidad}" for="modalidad" />
+                        <p:inputText id="modalidad" value="#{departamentoController.selected.modalidad}" title="#{myBundle.EditDepartamentoTitle_modalidad}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditDepartamentoLabel_codigosede}" for="codigosede" />
+                        <p:selectOneMenu id="codigosede" value="#{departamentoController.selected.codigosede}"  converter="sedeConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sedeController.items}"
+                                           var="codigosedeItem"
+                                           itemValue="#{codigosedeItem}"
+                                           itemLabel="#{codigosedeItem.codigosede.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departamentoController.save}" value="#{myBundle.Save}" update="display,:DepartamentoListForm:datalist,:DepartamentoListForm:DepartamentoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DepartamentoEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('DepartamentoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

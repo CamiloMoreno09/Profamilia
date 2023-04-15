@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmpleadoViewDlg" widgetVar="EmpleadoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewEmpleadoTitle}" closeOnEscape="true">
+
+            <h:form id="EmpleadoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{empleadoController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_identificacion}"/>
+                        <h:outputText value="#{empleadoController.selected.identificacion}" title="#{myBundle.ViewEmpleadoTitle_identificacion}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_nombre}"/>
+                        <h:outputText value="#{empleadoController.selected.nombre}" title="#{myBundle.ViewEmpleadoTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_celular}"/>
+                        <h:outputText value="#{empleadoController.selected.celular}" title="#{myBundle.ViewEmpleadoTitle_celular}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_correo}"/>
+                        <h:outputText value="#{empleadoController.selected.correo}" title="#{myBundle.ViewEmpleadoTitle_correo}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_cargo}"/>
+                        <h:outputText value="#{empleadoController.selected.cargo}" title="#{myBundle.ViewEmpleadoTitle_cargo}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_codigodepartamento}"/>
+                        <h:outputText value="#{empleadoController.selected.codigodepartamento.codigodepartamento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('EmpleadoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

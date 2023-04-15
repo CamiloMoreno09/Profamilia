@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditClienteTitle}" closeOnEscape="true">
+
+            <h:form id="ClienteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{clienteController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditClienteLabel_identificacion}" for="identificacion" />
+                        <h:outputText id="identificacion" value="#{clienteController.selected.identificacion}" />
+
+                        <p:outputLabel value="#{myBundle.EditClienteLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{myBundle.EditClienteTitle_nombre}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditClienteLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{clienteController.selected.numero}" title="#{myBundle.EditClienteTitle_numero}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{myBundle.EditClienteLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{clienteController.selected.correo}" title="#{myBundle.EditClienteTitle_correo}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditClienteLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{clienteController.selected.edad}" title="#{myBundle.EditClienteTitle_edad}"/>
+
+                        <p:outputLabel value="#{myBundle.EditClienteLabel_codigosede}" for="codigosede" />
+                        <p:selectOneMenu id="codigosede" value="#{clienteController.selected.codigosede}"  converter="sedeConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sedeController.items}"
+                                           var="codigosedeItem"
+                                           itemValue="#{codigosedeItem}"
+                                           itemLabel="#{codigosedeItem.codigosede.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clienteController.save}" value="#{myBundle.Save}" update="display,:ClienteListForm:datalist,:ClienteListForm:ClienteDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ClienteEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ClienteEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

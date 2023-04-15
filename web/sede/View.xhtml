@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SedeViewDlg" widgetVar="SedeViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSedeTitle}" closeOnEscape="true">
+
+            <h:form id="SedeViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{sedeController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSedeLabel_codigosede}"/>
+                        <h:outputText value="#{sedeController.selected.codigosede}" title="#{myBundle.ViewSedeTitle_codigosede}"/>
+
+                        <h:outputText value="#{myBundle.ViewSedeLabel_nombre}"/>
+                        <h:outputText value="#{sedeController.selected.nombre}" title="#{myBundle.ViewSedeTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewSedeLabel_direccion}"/>
+                        <h:outputText value="#{sedeController.selected.direccion}" title="#{myBundle.ViewSedeTitle_direccion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSedeLabel_capacidad}"/>
+                        <h:outputText value="#{sedeController.selected.capacidad}" title="#{myBundle.ViewSedeTitle_capacidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SedeViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

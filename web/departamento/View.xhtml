@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartamentoViewDlg" widgetVar="DepartamentoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewDepartamentoTitle}" closeOnEscape="true">
+
+            <h:form id="DepartamentoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{departamentoController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewDepartamentoLabel_codigodepartamento}"/>
+                        <h:outputText value="#{departamentoController.selected.codigodepartamento}" title="#{myBundle.ViewDepartamentoTitle_codigodepartamento}"/>
+
+                        <h:outputText value="#{myBundle.ViewDepartamentoLabel_nombre}"/>
+                        <h:outputText value="#{departamentoController.selected.nombre}" title="#{myBundle.ViewDepartamentoTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewDepartamentoLabel_modalidad}"/>
+                        <h:outputText value="#{departamentoController.selected.modalidad}" title="#{myBundle.ViewDepartamentoTitle_modalidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewDepartamentoLabel_codigosede}"/>
+                        <h:outputText value="#{departamentoController.selected.codigosede.codigosede}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('DepartamentoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ClienteEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditClienteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ClienteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ClienteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{clienteController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditClienteLabel_identificacion}" for="identificacion" />
+                            <h:outputText id="identificacion" value="#{clienteController.selected.identificacion}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditClienteLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{myBundle.EditClienteTitle_nombre}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditClienteLabel_numero}" for="numero" />
+                            <p:inputText id="numero" value="#{clienteController.selected.numero}" title="#{myBundle.EditClienteTitle_numero}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditClienteLabel_correo}" for="correo" />
+                            <p:inputText id="correo" value="#{clienteController.selected.correo}" title="#{myBundle.EditClienteTitle_correo}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditClienteLabel_edad}" for="edad" />
+                            <p:inputText id="edad" value="#{clienteController.selected.edad}" title="#{myBundle.EditClienteTitle_edad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditClienteLabel_codigosede}" for="codigosede" />
+                            <p:selectOneMenu id="codigosede" value="#{clienteController.selected.codigosede}"  converter="sedeConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{sedeController.items}"
+                                               var="codigosedeItem"
+                                               itemValue="#{codigosedeItem}"
+                                               itemLabel="#{codigosedeItem.codigosede.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{clienteController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ClienteListPage:ClienteListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ClienteListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
